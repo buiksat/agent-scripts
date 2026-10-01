@@ -35,9 +35,21 @@ jobs:
 
       - name: Test skill link sync and audit
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ripgrep
+          packages=()
+          command -v rg >/dev/null 2>&1 || packages+=(ripgrep)
+          command -v rsync >/dev/null 2>&1 || packages+=(rsync)
+          command -v python3 >/dev/null 2>&1 || packages+=(python3)
+          if [ "${#packages[@]}" -gt 0 ]; then
+            sudo apt-get update
+            sudo apt-get install -y "${packages[@]}"
+          fi
           /bin/bash scripts/test-sync-skills
+
+      - name: Test Herdr floor manager
+        run: |
+          /bin/bash skills/herdr-floor-manager/scripts/link-codex-skills.test.sh
+          /bin/bash skills/herdr-floor-manager/scripts/install-devserver.test.sh
+          /bin/bash skills/herdr-floor-manager/scripts/watch-agent.test.sh
 
       - name: Test ClawSweeper status helper
         run: skills/clawsweeper-status/scripts/clawsweeper-status.test.sh

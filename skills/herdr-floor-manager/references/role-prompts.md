@@ -30,6 +30,8 @@ When finished, report:
 3. checks run with exact results;
 4. remaining risks or uncertainties;
 5. current working-tree state.
+
+End the report with a standalone line made from `IMPLEMENTATION_COMPLETE`, then a colon, then the turn token `<turn-token>`. If you cannot finish, use `IMPLEMENTATION_BLOCKED`, a colon, and the same token as a standalone line, then state the exact blocker before that line.
 ```
 
 ## Full Paladin Launch
@@ -66,6 +68,7 @@ Using only the completed Paladin report and verified source, return:
 
 Stay read-only. Do not modify source files, run fixes, or broaden the review scope.
 If any default Paladin voice is excluded, unavailable, failed, or degraded, set VERDICT to CHANGES_REQUIRED and state that the full panel did not complete.
+End with a standalone line made from `REVIEW_COMPLETE`, then a colon, then the turn token `<turn-token>`.
 ```
 
 ## Fix Request
@@ -78,6 +81,7 @@ Address only the accepted review findings below. Preserve unrelated changes and 
 For each finding, verify the failure mode, implement the ownership-correct fix, add or update focused tests when appropriate, and rerun the required checks. Do not push, submit, land, or publish.
 
 Report each finding as fixed, rejected with evidence, or unresolved, followed by exact check results and working-tree state.
+End with a standalone line made from `IMPLEMENTATION_COMPLETE`, then a colon, then the turn token `<turn-token>`. If you cannot finish, use `IMPLEMENTATION_BLOCKED`, a colon, and the same token as a standalone line, then state the exact blocker before that line.
 ```
 
 ## Final Review

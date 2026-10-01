@@ -30,7 +30,7 @@ for name in herdr-floor-manager codex-first; do
     exit 1
   fi
   mkdir -p "$target_path"
-  rsync -a "$source_path/" "$target_path/"
+  rsync -a --delete "$source_path/" "$target_path/"
 done
 
 "$claude_skills/herdr-floor-manager/scripts/link-codex-skills.sh"

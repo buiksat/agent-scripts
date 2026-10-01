@@ -6,6 +6,10 @@ summary: Timeline of guardrail helper changes mirrored from Sweetistics and rela
 
 ## Unreleased
 
+- Made `herdr-floor-manager` installs preserve foreign Codex links, create links safely under contention, resolve install homes, and delete stale installed files.
+
+- Hardened `herdr-floor-manager` turn supervision against stale markers, reviewer wakeup races, deadline-edge completions, successful stderr warnings, and revision-free status flaps.
+
 - Added `herdr-floor-manager` to coordinate one Codex implementer with read-only full-panel Claude/Paladin review in a bounded Herdr fix-review loop.
 
 - Put Codex worker launch flags first in `codex-first`: copy-verbatim fresh/resume lines with Fast service tier, a no-subset rule, and a running-worker check.
