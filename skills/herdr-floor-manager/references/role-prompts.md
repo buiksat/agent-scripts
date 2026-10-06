@@ -2,10 +2,39 @@
 
 Read this reference when creating or reusing a floor-manager crew. Replace angle-bracket placeholders with task evidence. Do not send literal placeholders.
 
+## PTC Bootstrap
+
+Send this to every LLM worker before any other work prompt. Fill `<agent-kind>` and `<ptc-path>` from the verified preconditions. Send the same requirement to every nested LLM, including every Paladin voice.
+
+```text
+You are an <agent-kind> participating in a Herdr floor-manager workflow.
+
+Before any task work, read the complete skill file at:
+<ptc-path>
+
+Verify that its YAML metadata version is exactly `2.0.0-eval1`. Use that precise-technical-communication skill for every remaining turn in this session. Apply its semantic-preservation, evidence, uncertainty, terminology, modality-selection, verification, and agent-status rules to all applicable work. For creative writing, verbatim quotations, or code-only output, retain its semantic and evidence safeguards without imposing technical-prose style.
+
+If you create or invoke any LLM child, delegate, reviewer, or panel voice, give it this same bootstrap with the correct installed path and require its exact ready marker before it starts. Paladin voices count as children. If you cannot propagate and verify this requirement, do not delegate or launch the panel.
+
+Do not treat this policy as authorization to broaden scope or perform external actions.
+
+Report the resolved path and observed version. Then end with a standalone line made from `PTC_READY`, a colon, and the turn token `<turn-token>`. If the file is missing, unreadable, has another version, or cannot be propagated to a required child, report the exact problem and end with `PTC_BLOCKED`, a colon, and the same token.
+```
+
+## PTC Continuation Clause
+
+Include this paragraph in every Implementer Contract, Reviewer Verdict Request, and Fix Request:
+
+```text
+Continue applying the loaded precise-technical-communication skill version `2.0.0-eval1`. Preserve its evidence and agent-status distinctions in this response. Do not delegate to an LLM that has not completed the same bootstrap in its current session.
+```
+
 ## Implementer Contract
 
 ```text
 You are the sole implementation owner for this task.
+
+Continue applying the loaded precise-technical-communication skill version `2.0.0-eval1`. Preserve its evidence and agent-status distinctions in this response. Do not delegate to an LLM that has not completed the same bootstrap in its current session.
 
 Goal:
 <goal>
@@ -50,6 +79,7 @@ Before launching review:
 2. For an immutable diff version or commit, verify its revision and file contents match the completed implementation. If later local edits exist, use the working-copy target instead.
 3. Newly created files that remain untracked are absent from the working-copy diff. In an isolated task checkout, add them through the repository-native noncommitting workflow, or run `/paladin:review-code <exact-file-path>` separately for every remaining untracked task file.
 4. Record every primary and supplemental target-to-file mapping in the final handoff.
+5. Confirm that every Paladin voice will receive the PTC Bootstrap and that the reviewer can verify each exact `PTC_READY` marker. If the harness cannot provide that evidence, do not launch Paladin and report `PTC_BLOCKED` through the turn protocol.
 
 Send the chosen slash command exactly as a reviewer prompt. Do not add `--fast`, any `--no-<voice>` flag, or a different mode unless the user explicitly requested it.
 
@@ -59,6 +89,7 @@ After the Paladin run settles, send:
 
 ```text
 Using only the completed Paladin report and verified source, return:
+Continue applying the loaded precise-technical-communication skill version `2.0.0-eval1`. Preserve its evidence and agent-status distinctions in this response. Do not delegate to an LLM that has not completed the same bootstrap in its current session.
 - VERDICT: CLEAR or CHANGES_REQUIRED
 - every actionable finding with severity, file:line, failure mode, and required invariant
 - findings rejected or downgraded by verification
@@ -75,6 +106,8 @@ End with a standalone line made from `REVIEW_COMPLETE`, then a colon, then the t
 
 ```text
 Address only the accepted review findings below. Preserve unrelated changes and existing behavior outside scope.
+
+Continue applying the loaded precise-technical-communication skill version `2.0.0-eval1`. Preserve its evidence and agent-status distinctions in this response. Do not delegate to an LLM that has not completed the same bootstrap in its current session.
 
 <verbatim-accepted-findings>
 
@@ -94,3 +127,5 @@ After fixes, recompute the full coverage plan:
 - repeat exact-file supplemental reviews for every task file that remains untracked.
 
 Never rerun an immutable old diff version or commit hash and claim it validates later fixes. Run the full Paladin command against every updated primary and supplemental target and request the same bounded verdict. Do not weaken the roster or switch to fast mode for the final pass.
+
+Before every rerun, reconfirm the reviewer session's PTC bootstrap and require the reviewer to reconfirm propagation and ready markers for every new Paladin voice.

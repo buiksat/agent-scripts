@@ -1,4 +1,4 @@
 interface:
   display_name: "Herdr Floor Manager"
-  short_description: "Coordinate Codex implementation and Paladin review"
-  default_prompt: "Use $herdr-floor-manager to coordinate this implementation with a Codex implementer and full-panel Claude/Paladin review."
+  short_description: "Coordinate PTC-gated Codex implementation and Paladin review"
+  default_prompt: "Use $herdr-floor-manager to coordinate this implementation with a Codex implementer and full-panel Claude/Paladin review. Require every LLM agent and panel voice to load precise-technical-communication 2.0.0-eval1 before work."
